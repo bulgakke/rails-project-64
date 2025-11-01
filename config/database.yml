@@ -82,7 +82,7 @@ production:
   primary: &primary_production
     <<: *default
     database: blog_postgres_7vwh
-    username: blog_postgres_7vwh_user
+    username:
     password: <%= ENV["COLLECTIVE_BLOG_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
