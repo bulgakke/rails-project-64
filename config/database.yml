@@ -81,8 +81,9 @@ test:
 production:
   primary: &primary_production
     <<: *default
+    host: dpg-d436fq2dbo4c73a7kd70-a
     database: blog_postgres_7vwh
-    username:
+    username: blog_postgres_7vwh
     password: <%= ENV["COLLECTIVE_BLOG_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
