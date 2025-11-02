@@ -1,9 +1,9 @@
 nav.d-flex
-  div.m-2.me-auto Blog
+  .m-2.me-auto Blog
 
   - if user_signed_in?
-    div.m-2 Signed in as #{current_user.username}
-    div.m-2 = button_to "Logout", destroy_user_session_path, method: :delete
+    .m-2 Signed in as #{current_user.username}
+    .m-2 = button_to "Logout", destroy_user_session_path, method: :delete
   - else
-    div.m-2 = link_to "Sign up", new_user_registration_path
-    div.m-2 = link_to "Sign in", new_user_session_path
+    .m-2 = link_to "Sign up", new_user_registration_path
+    .m-2 = link_to "Sign in", new_user_session_path
