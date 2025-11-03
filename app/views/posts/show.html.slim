@@ -24,3 +24,6 @@
       .d-flex.justify-content-end
         = link_to "Edit", edit_post_path(@post), class: "btn btn-primary me-2"
         = button_to "Delete", @post, method: :delete, class: "btn btn-danger"
+
+    - for comment in @post.comments.where(ancestry: "/") do
+      = render "comments/comment", comment: comment

@@ -2,7 +2,7 @@
   Category.find_or_create_by!(name: category_name)
 end
 
-user = User.find_or_create_by!(email: "test@example.com", username: "test") do |user|
+user = User.find_or_create_by!(email: "test@example.com", username: "testuser") do |user|
   user.password = "password"
 end
 
@@ -25,6 +25,16 @@ first_comment = PostComment.find_or_create_by!(content: "First comment", author_
 
 PostComment.find_or_create_by!(content: "Second comment", author_id: user.id, post_id: post.id) do |comment|
   comment.parent = first_comment
+end
+
+current_comment = PostComment.find_or_create_by!(content: "Beginning of a very deep chain of comments", author_id: user.id, post_id: post.id)
+
+33.times do |i|
+  next_comment = PostComment.find_or_create_by!(content: "#{"very " * i}deep comment", author_id: user.id, post_id: post.id) do |comment|
+    comment.parent = current_comment
+  end
+
+  current_comment = next_comment
 end
 
 puts "Seeds created"

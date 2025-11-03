@@ -1,0 +1,12 @@
+div id="#{dom_id comment}"
+
+.card.pe-0.mt-3
+  .card-header.d-flex.justify-content-between
+    = comment.author.username
+    em = render "shared/timestamps", resource: comment
+
+  .card-body.pe-0.pb-0
+    .p.card-text.mb-3 = comment.content
+
+    - for child_comment in comment.children do
+      = render "comments/comment", comment: child_comment

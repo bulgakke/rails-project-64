@@ -7,3 +7,6 @@
     em
       = "by #{post.author.username} at "
       = render "shared/timestamps", resource: post
+
+    br
+    .border-end-1 = "#{post.comments.size} comments"
