@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts, inverse_of: :author
+  has_many :comments, inverse_of: :user
 
   validates :username,
     presence: true,

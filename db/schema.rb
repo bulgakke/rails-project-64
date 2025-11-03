@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_03_132752) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_03_181401) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,6 +18,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_132752) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "post_comments", force: :cascade do |t|
+    t.text "content", null: false
+    t.string "ancestry", null: false, collation: "C"
+    t.bigint "post_id", null: false
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_post_comments_on_ancestry"
+    t.index ["author_id"], name: "index_post_comments_on_author_id"
+    t.index ["post_id"], name: "index_post_comments_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -45,6 +57,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_132752) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "post_comments", "posts"
+  add_foreign_key "post_comments", "users", column: "author_id"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users", column: "author_id"
 end
