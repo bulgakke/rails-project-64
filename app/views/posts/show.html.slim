@@ -12,13 +12,7 @@
 
     em
       = "by #{@post.author.username} at "
-      span data-controller="local-time"
-        time data-local-time-target="time" data-datetime="#{@post.created_at.iso8601}"
-          = @post.created_at
-        - if updated?(@post)
-          = ", last updated at "
-          time data-local-time-target="time" data-datetime="#{@post.updated_at.iso8601}"
-            = @post.updated_at
+      = render "shared/timestamps", resource: @post
 
     - if current_user == @post.author
       .d-flex.justify-content-end
