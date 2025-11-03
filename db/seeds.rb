@@ -11,9 +11,15 @@ year_ago = 1.year.ago
 
 post = Post.find_or_create_by!(title: "New post", body: "Sample post", category_id: Category.first.id, author_id: user.id)
 
-Post.find_or_create_by!(title: "Old post", body: "Sample post 2", created_at: month_ago, updated_at: month_ago, category_id: Category.second.id, author_id: user.id)
+Post.find_or_create_by!(title: "Old post", body: "Sample post 2", category_id: Category.second.id, author_id: user.id) do |post|
+  post.created_at = month_ago
+  post.updated_at = month_ago
+end
 
-Post.find_or_create_by!(title: "Very old post", body: "Sample post 3", created_at: year_ago, updated_at: year_ago, category_id: Category.last.id, author_id: user.id)
+Post.find_or_create_by!(title: "Very old post", body: "Sample post 3", category_id: Category.last.id, author_id: user.id) do |post|
+  post.created_at = year_ago
+  post.updated_at = year_ago
+end
 
 first_comment = PostComment.find_or_create_by!(content: "First comment", author_id: user.id, post_id: post.id)
 
