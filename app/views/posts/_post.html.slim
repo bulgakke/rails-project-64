@@ -1,0 +1,12 @@
+div id="#{dom_id post}"
+
+  h2 = post.title
+
+  p = post.body
+
+  em
+    = "by #{post.author.username} at "
+    time = post.created_at
+    - if updated?(post)
+      = ", last updated at "
+      time = post.updated_at
