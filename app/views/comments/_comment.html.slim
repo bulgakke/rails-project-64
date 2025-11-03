@@ -5,8 +5,15 @@ div id="#{dom_id comment}"
     = comment.author.username
     em = render "shared/timestamps", resource: comment
 
+  - if current_user == comment.author
+    .d-flex.justify-content-end
+      = button_to "Delete", post_comment_path(@post, comment), method: :delete, class: "btn btn-danger"
+
   .card-body.pe-0.pb-0
     .p.card-text.mb-3 = comment.content
+
+    - if current_user
+      = render "comments/form", comment: comment.children.build(post: comment.post)
 
     - for child_comment in comment.children do
       = render "comments/comment", comment: child_comment

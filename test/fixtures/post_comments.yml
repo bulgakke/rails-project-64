@@ -2,24 +2,24 @@
 
   one:
     content: first
-    user: eugene
+    author: eugene
     post: one
     ancestry: /
 
   with_comments:
     content: this is comment with comments
-    user: eugene
+    author: eugene
     post: one
     ancestry: /
 
   nested:
     content: commented comment
-    user: eugene
+    author: eugene
     post: one
     ancestry: /<%= ActiveRecord::FixtureSet.identify(:with_comments) %>/
 
   deep_nested:
     content: deep comment
-    user: eugene
+    author: eugene
     post: one
     ancestry: /<%= [ActiveRecord::FixtureSet.identify(:with_comments), ActiveRecord::FixtureSet.identify(:nested)].join('/') %>/

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts, inverse_of: :author
-  has_many :comments, inverse_of: :user
+  has_many :comments, inverse_of: :author, class_name: "PostComment"
 
   validates :username,
     presence: true,
