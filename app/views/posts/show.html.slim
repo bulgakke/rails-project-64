@@ -1,12 +1,26 @@
-p style="color: green" = notice
+.container.mt-5
+  .row.justify-content-center
+    ol.breadcrumb
+      .breadcrumb-item = link_to "All posts", posts_path
+      .breadcrumb-item = "#{@post.category.name}"
 
-== render @post
+    p style="color: green" = notice
 
-div
-  - if current_user == @post.author
-    => link_to "Edit this post", edit_post_path(@post)
-    '|
-  =< link_to "Back to posts", posts_path
+    h2 = @post.title
 
-  - if current_user == @post.author
-    = button_to "Destroy this post", @post, method: :delete
+    p = @post.body
+
+    em
+      = "by #{@post.author.username} at "
+      span data-controller="local-time"
+        time data-local-time-target="time" data-datetime="#{@post.created_at.iso8601}"
+          = @post.created_at
+        - if updated?(@post)
+          = ", last updated at "
+          time data-local-time-target="time" data-datetime="#{@post.updated_at.iso8601}"
+            = @post.updated_at
+
+    - if current_user == @post.author
+      .d-flex.justify-content-end
+        = link_to "Edit", edit_post_path(@post), class: "btn btn-primary me-2"
+        = button_to "Delete", @post, method: :delete, class: "btn btn-danger"

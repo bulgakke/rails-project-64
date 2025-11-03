@@ -1,15 +1,15 @@
-div id="#{dom_id post}"
+.card.my-3 id="#{dom_id post}"
+  .card-body
+    h3 = link_to post.title, post
 
-  h2 = post.title
+    p = post.body.truncate(200)
 
-  p = post.body
-
-  em
-    = "by #{post.author.username} at "
-    span data-controller="local-time"
-      time data-local-time-target="time" data-datetime="#{post.created_at.iso8601}"
-        = post.created_at
-      - if updated?(post)
-        = ", last updated at "
-        time data-local-time-target="time" data-datetime="#{post.updated_at.iso8601}"
-          = post.updated_at
+    em
+      = "by #{post.author.username} at "
+      span data-controller="local-time"
+        time data-local-time-target="time" data-datetime="#{post.created_at.iso8601}"
+          = post.created_at
+        - if updated?(post)
+          = ", last updated at "
+          time data-local-time-target="time" data-datetime="#{post.updated_at.iso8601}"
+            = post.updated_at
