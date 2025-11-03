@@ -1,0 +1,7 @@
+span data-controller="local-time"
+  time data-local-time-target="time" data-datetime="#{resource.created_at.iso8601}"
+    = resource.created_at
+  - if updated?(resource)
+    = ", last updated at "
+    time data-local-time-target="time" data-datetime="#{resource.updated_at.iso8601}"
+      = resource.updated_at
