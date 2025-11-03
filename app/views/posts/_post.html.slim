@@ -6,7 +6,10 @@ div id="#{dom_id post}"
 
   em
     = "by #{post.author.username} at "
-    time = post.created_at
-    - if updated?(post)
-      = ", last updated at "
-      time = post.updated_at
+    span data-controller="local-time"
+      time data-local-time-target="time" data-datetime="#{post.created_at.iso8601}"
+        = post.created_at
+      - if updated?(post)
+        = ", last updated at "
+        time data-local-time-target="time" data-datetime="#{post.updated_at.iso8601}"
+          = post.updated_at
