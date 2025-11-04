@@ -10,14 +10,14 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create comment" do
     assert_difference("PostComment.count") do
-      post post_comments_url(@post), params: { comment: { content: "test", ancestry: "/", creator_id: users(:eugene).id } }
+      post post_comments_url(@post), params: { post_comment: { content: "test", ancestry: "/", creator_id: users(:eugene).id } }
     end
 
     assert_redirected_to post_url(@post)
   end
 
   test "should update comment" do
-    patch post_comment_url(@post, @comment), params: { comment: { content: "new" } }
+    patch post_comment_url(@post, @comment), params: { post_comment: { content: "new" } }
     assert_redirected_to post_url(@post)
   end
 
