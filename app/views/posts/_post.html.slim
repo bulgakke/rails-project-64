@@ -9,5 +9,6 @@
       = render "shared/timestamps", resource: post
 
     br
-    = "#{post.comments.size} comments | "
+    - comments = post.comments.size
+    = "#{comments} #{"comment".pluralize(comments)} | "
     = "#{post.likes.size} people liked"

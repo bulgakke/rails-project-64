@@ -22,7 +22,9 @@
         = button_to post_likes_path(@post), class: "btn btn-link p-0 text-muted" do
           i.bi.bi-heart
 
-      .ms-2 = "#{@post.likes.size} people liked this"
+      .ms-2
+        - likes = @post.likes.size
+        = "#{likes} #{"person".pluralize(likes)} liked this"
 
     - if current_user == @post.author
       .d-flex.justify-content-end
@@ -30,6 +32,10 @@
         = button_to "Delete", @post, method: :delete, class: "btn btn-danger"
 
     hr.my-4
+
+    h3
+      - comments = @post.comments.size
+      = "#{comments} #{"comment".pluralize(comments)}"
 
     - if current_user
       = render "comments/form", comment: @post.comments.build
