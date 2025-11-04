@@ -30,7 +30,7 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
   test 'should destroy like' do
     delete post_like_url(@post, @like)
 
-    assert { @post.reload.likes.none? }
+    assert { @post.reload.likes.to_a.none? }
 
     assert_redirected_to @post
   end

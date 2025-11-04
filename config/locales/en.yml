@@ -32,7 +32,7 @@ en:
     created: Post was successfully created.
     updated: Post was successfully updated.
     destroyed: Post was successfully destroyed.
-  comment:
+  comments:
     error: Something went wrong.
     created: Comment was successfully created.
     updated: Comment was successfully updated.

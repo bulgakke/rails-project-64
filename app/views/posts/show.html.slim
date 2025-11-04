@@ -1,10 +1,10 @@
 .container.mt-5
   .row.justify-content-center
     ol.breadcrumb
-      .breadcrumb-item = link_to "All posts", posts_path
-      .breadcrumb-item = "#{@post.category.name}"
+      .breadcrumb-item = link_to 'All posts', posts_path
+      .breadcrumb-item = @post.category.name
 
-    p style="color: green" = notice
+    p style='color: green' = notice
 
     h2 = @post.title
 
@@ -13,33 +13,33 @@
     .d-flex.justify-content-between
       em.me-auto
         = "by #{@post.creator.username} at "
-        = render "shared/timestamps", resource: @post
+        = render 'shared/timestamps', resource: @post
 
-      - if like = @post.likes.find_by(user: current_user)
-        = button_to post_like_path(@post, like), class: "btn btn-link p-0 text-danger", method: :delete do
+      - if (like = @post.likes.find_by(user: current_user))
+        = button_to post_like_path(@post, like), class: 'btn btn-link p-0 text-danger', method: :delete do
           i.bi.bi-heart-fill
       - else
-        = button_to post_likes_path(@post), class: "btn btn-link p-0 text-muted" do
+        = button_to post_likes_path(@post), class: 'btn btn-link p-0 text-muted' do
           i.bi.bi-heart
 
       .ms-2
         - likes = @post.likes.size
-        = "#{likes} #{"person".pluralize(likes)} liked this"
+        = "#{likes} #{'person'.pluralize(likes)} liked this"
 
     - if current_user == @post.creator
       .d-flex.justify-content-end
-        = link_to "Edit", edit_post_path(@post), class: "btn btn-primary me-2"
-        = button_to "Delete", @post, method: :delete, class: "btn btn-danger"
+        = link_to 'Edit', edit_post_path(@post), class: 'btn btn-primary me-2'
+        = button_to 'Delete', @post, method: :delete, class: 'btn btn-danger'
 
     hr.my-4
 
     h3
       - comments = @post.comments.size
-      = "#{comments} #{"comment".pluralize(comments)}"
+      = "#{comments} #{'comment'.pluralize(comments)}"
 
     - if current_user
-      = render "comments/form", comment: @post.comments.build
+      = render 'comments/form', comment: @post.comments.build
 
     .pb-5
-      - for comment in @post.comments.order(created_at: :desc).where(ancestry: "/") do
-        = render "comments/comment", comment: comment
+      - @post.comments.order(created_at: :desc).where(ancestry: '/').each do |comment|
+        = render 'comments/comment', comment: comment

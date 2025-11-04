@@ -1,4 +1,4 @@
-.card.my-3 id="#{dom_id post}"
+.card.my-3 id='#{dom_id post}'
   .card-body
     h3 = link_to post.title, post
 
@@ -6,9 +6,9 @@
 
     em
       = "by #{post.creator.username} at "
-      = render "shared/timestamps", resource: post
+      = render 'shared/timestamps', resource: post
 
     br
     - comments = post.comments.size
-    = "#{comments} #{"comment".pluralize(comments)} | "
+    = "#{comments} #{'comment'.pluralize(comments)} | "
     = "#{post.likes.size} people liked"

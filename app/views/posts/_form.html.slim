@@ -1,22 +1,22 @@
 = form_with(model: post) do |form|
   - if post.errors.any?
-    div style="color: red"
-      h2 = "#{pluralize(post.errors.count, "error")} prohibited this post from being saved:"
+    div style='color: red'
+      h2 = "#{pluralize(post.errors.count, 'error')} prohibited this post from being saved:"
       ul
         - post.errors.each do |error|
           li = error.full_message
 
   .mb-3
-    = form.label :category, class: "form-label mb-0"
-    = form.collection_select :category_id, Category.all, :id, :name, {}, class: "d-block form-select"
+    = form.label :category, class: 'form-label mb-0'
+    = form.collection_select :category_id, Category.all, :id, :name, {}, class: 'd-block form-select'
 
   .mb-3
-    = form.label :title, class: "form-label mb-0"
-    = form.text_field :title, class: "form-control", autofocus: true
+    = form.label :title, class: 'form-label mb-0'
+    = form.text_field :title, class: 'form-control', autofocus: true
 
   .mb-3
-    = form.label :body, class: "form-label mb-0"
-    = form.text_area :body, class: "form-control"
+    = form.label :body, class: 'form-label mb-0'
+    = form.text_area :body, class: 'form-control'
 
   .d-grid.mt-4
-    = form.submit class: "btn btn-primary btn-lg"
+    = form.submit class: 'btn btn-primary btn-lg'
