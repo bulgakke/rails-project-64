@@ -24,5 +24,6 @@
     - if current_user
       = render "comments/form", comment: @post.comments.build
 
-    - for comment in @post.comments.order(created_at: :desc).where(ancestry: "/") do
-      = render "comments/comment", comment: comment
+    .pb-5
+      - for comment in @post.comments.order(created_at: :desc).where(ancestry: "/") do
+        = render "comments/comment", comment: comment

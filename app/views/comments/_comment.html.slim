@@ -5,15 +5,22 @@ div id="#{dom_id comment}"
     = comment.author.username
     em = render "shared/timestamps", resource: comment
 
-  - if current_user == comment.author
-    .d-flex.justify-content-end
-      = button_to "Delete", post_comment_path(@post, comment), method: :delete, class: "btn btn-danger"
-
   .card-body.pe-0.pb-0
     .p.card-text.mb-3 = comment.content
 
     - if current_user
-      = render "comments/form", comment: comment.children.build(post: comment.post)
+      .d-flex.justify-content-between
+        button.btn.btn-sm.btn-outline-primary.my-2[
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#reply-form-#{comment.id}"
+          aria-expanded="false"
+          aria-controls="reply-form-#{comment.id}"
+        ] Reply
+        - if current_user == comment.author
+            = button_to "Delete", post_comment_path(@post, comment), method: :delete, class: "btn btn-danger mt-1 me-1"
+      .collapse id="reply-form-#{comment.id}"
+        = render "comments/form", comment: comment.children.build(post: comment.post)
 
     - for child_comment in comment.children do
       = render "comments/comment", comment: child_comment
