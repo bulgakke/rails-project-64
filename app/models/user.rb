@@ -8,9 +8,7 @@ class User < ApplicationRecord
   has_many :comments, class_name: "PostComment"
   has_many :likes, class_name: "PostLike"
 
-  validates :username,
-    presence: true,
-    uniqueness: true,
-    length: { minimum: 4, maximum: 20 },
-    format: { with: /\A[a-zA-Z0-9_]+\z/ }
+  def username
+    read_attribute(:username).presence || email.split("@").first
+  end
 end
