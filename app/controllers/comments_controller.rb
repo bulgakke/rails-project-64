@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
   private
 
     def allow_only_author
-      redirect_to(root_path, status: :forbidden) unless @comment.author == current_user
+      redirect_to(root_path, status: :forbidden) unless @comment.user == current_user
     end
 
     def set_comment

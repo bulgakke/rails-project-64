@@ -5,7 +5,7 @@
     p = post.body.truncate(200)
 
     em
-      = "by #{post.author.username} at "
+      = "by #{post.creator.username} at "
       = render "shared/timestamps", resource: post
 
     br

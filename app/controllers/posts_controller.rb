@@ -61,7 +61,7 @@ class PostsController < ApplicationController
 
   private
     def allow_only_author
-      redirect_to(root_path, status: :forbidden) unless @post.author == current_user
+      redirect_to(root_path, status: :forbidden) unless @post.creator == current_user
     end
 
     # Use callbacks to share common setup or constraints between actions.

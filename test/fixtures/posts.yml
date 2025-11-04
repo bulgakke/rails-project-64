@@ -4,10 +4,10 @@ one:
   title: MyText
   body: MyText
   category: one
-  author: eugene
+  creator: eugene
 
 two:
   title: MyText
   body: MyText
   category: two
-  author: eugene
+  creator: eugene

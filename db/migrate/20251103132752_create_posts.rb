@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[8.0]
       t.text :title, null: false
       t.text :body, null: false
       t.references :category, null: false, foreign_key: true
-      t.references :author, null: false, foreign_key: { to_table: :users }
+      t.references :creator, null: false, foreign_key: { to_table: :users }
 
       t.timestamps
     end

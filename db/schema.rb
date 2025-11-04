@@ -24,12 +24,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_04_174709) do
     t.text "content", null: false
     t.string "ancestry", null: false
     t.bigint "post_id", null: false
-    t.bigint "author_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ancestry"], name: "index_post_comments_on_ancestry"
-    t.index ["author_id"], name: "index_post_comments_on_author_id"
     t.index ["post_id"], name: "index_post_comments_on_post_id"
+    t.index ["user_id"], name: "index_post_comments_on_user_id"
   end
 
   create_table "post_likes", force: :cascade do |t|
@@ -46,13 +46,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_04_174709) do
     t.text "title", null: false
     t.text "body", null: false
     t.bigint "category_id", null: false
-    t.bigint "author_id", null: false
+    t.bigint "creator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comments_count", default: 0, null: false
     t.integer "likes_count", default: 0, null: false
-    t.index ["author_id"], name: "index_posts_on_author_id"
     t.index ["category_id"], name: "index_posts_on_category_id"
+    t.index ["creator_id"], name: "index_posts_on_creator_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,9 +70,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_04_174709) do
   end
 
   add_foreign_key "post_comments", "posts"
-  add_foreign_key "post_comments", "users", column: "author_id"
+  add_foreign_key "post_comments", "users"
   add_foreign_key "post_likes", "posts"
   add_foreign_key "post_likes", "users"
   add_foreign_key "posts", "categories"
-  add_foreign_key "posts", "users", column: "author_id"
+  add_foreign_key "posts", "users", column: "creator_id"
 end

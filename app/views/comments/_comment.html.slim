@@ -2,7 +2,7 @@ div id="#{dom_id comment}"
 
 .card.pe-0.mt-3
   .card-header.d-flex.justify-content-between
-    = comment.author.username
+    = comment.user.username
     em = render "shared/timestamps", resource: comment
 
   .card-body.pe-0.pb-0
@@ -17,7 +17,7 @@ div id="#{dom_id comment}"
           aria-expanded="false"
           aria-controls="reply-form-#{comment.id}"
         ] Reply
-        - if current_user == comment.author
+        - if current_user == comment.user
             = button_to "Delete", post_comment_path(@post, comment), method: :delete, class: "btn btn-danger mt-1 me-1"
       .collapse id="reply-form-#{comment.id}"
         = render "comments/form", comment: comment.children.build(post: comment.post)

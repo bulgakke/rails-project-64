@@ -8,7 +8,7 @@ class CreatePostComments < ActiveRecord::Migration[8.0]
       t.index :ancestry
 
       t.references :post, null: false, foreign_key: true
-      t.references :author, null: false, foreign_key: { to_table: :users }
+      t.references :user, null: false, foreign_key: { to_table: :users }
 
       t.timestamps
     end
