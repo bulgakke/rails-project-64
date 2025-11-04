@@ -10,9 +10,19 @@
 
     p = @post.body
 
-    em
-      = "by #{@post.author.username} at "
-      = render "shared/timestamps", resource: @post
+    .d-flex.justify-content-between
+      em.me-auto
+        = "by #{@post.author.username} at "
+        = render "shared/timestamps", resource: @post
+
+      - if like = @post.likes.find_by(user: current_user)
+        = button_to post_like_path(@post, like), class: "btn btn-link p-0 text-danger", method: :delete do
+          i.bi.bi-heart-fill
+      - else
+        = button_to post_likes_path(@post), class: "btn btn-link p-0 text-muted" do
+          i.bi.bi-heart
+
+      .ms-2 = "#{@post.likes.size} people liked this"
 
     - if current_user == @post.author
       .d-flex.justify-content-end
