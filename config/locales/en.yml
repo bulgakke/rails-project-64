@@ -28,4 +28,12 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  posts:
+    created: Post was successfully created.
+    updated: Post was successfully updated.
+    destroyed: Post was successfully destroyed.
+  comment:
+    error: Something went wrong.
+    created: Comment was successfully created.
+    updated: Comment was successfully updated.
+    destroyed: Comment was successfully destroyed.

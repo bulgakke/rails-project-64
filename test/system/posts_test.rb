@@ -1,4 +1,6 @@
-require "application_system_test_case"
+# frozen_string_literal: true
+
+require 'application_system_test_case'
 
 class PostsTest < ApplicationSystemTestCase
   setup do
@@ -7,39 +9,39 @@ class PostsTest < ApplicationSystemTestCase
     sign_in users(:eugene)
   end
 
-  test "visiting the index" do
+  test 'visiting the index' do
     visit posts_url
-    assert_selector "h2", text: "Posts"
+    assert_selector 'h2', text: 'Posts'
   end
 
-  test "should create post" do
+  test 'should create post' do
     visit posts_url
-    click_on "New post"
+    click_on 'New post'
 
-    fill_in "Title", with: "test"
-    fill_in "Body", with: "test"
+    fill_in 'Title', with: 'test'
+    fill_in 'Body', with: 'test'
 
-    click_on "Create Post"
+    click_on 'Create Post'
 
-    assert_text "Post was successfully created"
+    assert_text 'Post was successfully created'
   end
 
-  test "should update Post" do
+  test 'should update Post' do
     visit post_url(@post)
-    click_on "Edit", match: :first
+    click_on 'Edit', match: :first
 
-    fill_in "Title", with: "test"
-    fill_in "Body", with: "test"
+    fill_in 'Title', with: 'test'
+    fill_in 'Body', with: 'test'
 
-    click_on "Update Post"
+    click_on 'Update Post'
 
-    assert_text "Post was successfully updated"
+    assert_text 'Post was successfully updated'
   end
 
-  test "should destroy Post" do
+  test 'should destroy Post' do
     visit post_url(@post)
-    click_on "Delete", match: :first
+    click_on 'Delete', match: :first
 
-    assert_text "Post was successfully destroyed"
+    assert_text 'Post was successfully destroyed'
   end
 end

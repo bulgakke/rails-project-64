@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ update destroy ]
+  before_action :set_comment, only: %i[update destroy]
   before_action :authenticate_user!
-  before_action :allow_only_author, only: %i[ update destroy ]
+  before_action :allow_only_author, only: %i[update destroy]
 
   # POST /comments or /comments.json
   def create
@@ -9,10 +11,10 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment.post, notice: "Comment was successfully created." }
+        format.html { redirect_to @comment.post, notice: t('comments.created') }
         format.json { render :show, status: :created, location: @comment }
       else
-        format.html { redirect_to @comment.post, status: :unprocessable_content, alert: "Something went wrong" }
+        format.html { redirect_to @comment.post, status: :unprocessable_content, alert: t('comments.error') }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -22,7 +24,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @comment.post, notice: "Comment was successfully updated.", status: :see_other }
+        format.html { redirect_to @comment.post, notice: t('comments.updated'), status: :see_other }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -36,23 +38,23 @@ class CommentsController < ApplicationController
     @comment.destroy!
 
     respond_to do |format|
-      format.html { redirect_to @comment.post, notice: "Comment was successfully destroyed.", status: :see_other }
+      format.html { redirect_to @comment.post, notice: t('comments.destroyed'), status: :see_other }
       format.json { head :no_content }
     end
   end
 
   private
 
-    def allow_only_author
-      redirect_to(root_path, status: :forbidden) unless @comment.user == current_user
-    end
+  def allow_only_author
+    redirect_to(root_path, status: :forbidden) unless @comment.user == current_user
+  end
 
-    def set_comment
-      @comment = PostComment.find(params.expect(:id))
-    end
+  def set_comment
+    @comment = PostComment.find(params.expect(:id))
+  end
 
-    # Only allow a list of trusted parameters through.
-    def comment_params
-      params.expect(post_comment: [ :content, :ancestry ])
-    end
+  # Only allow a list of trusted parameters through.
+  def comment_params
+    params.expect(post_comment: %i[content ancestry])
+  end
 end

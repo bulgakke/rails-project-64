@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   before_action :set_post, only: %i[destroy create]
   before_action :set_like, only: %i[destroy]
@@ -18,13 +20,13 @@ class LikesController < ApplicationController
 
   private
 
-    def set_post
-      @post = Post.find(params[:post_id])
-    end
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
 
-    def set_like
-      @like = current_user.likes.find_by(id: params[:id])
+  def set_like
+    @like = current_user.likes.find_by(id: params[:id])
 
-      redirect_to(@post) unless @like
-    end
+    redirect_to(@post) unless @like
+  end
 end
