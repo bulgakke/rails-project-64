@@ -3,12 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["time"]
 
-  initialize() {
-    console.log("LocalTimeController initialized")
-  }
-
   connect() {
-    console.log("LocalTimeController connected")
     this.updateTimes()
   }
 
