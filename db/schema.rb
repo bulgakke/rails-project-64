@@ -22,7 +22,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_04_174709) do
 
   create_table "post_comments", force: :cascade do |t|
     t.text "content", null: false
-    t.string "ancestry", null: false, collation: "C"
+    t.string "ancestry", null: false
     t.bigint "post_id", null: false
     t.bigint "author_id", null: false
     t.datetime "created_at", null: false
