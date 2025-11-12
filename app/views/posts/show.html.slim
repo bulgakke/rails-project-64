@@ -1,7 +1,7 @@
 .container.mt-5
   .row.justify-content-center
     ol.breadcrumb
-      .breadcrumb-item = link_to 'All posts', posts_path
+      .breadcrumb-item = link_to t('.index'), posts_path
       .breadcrumb-item = @post.category.name
 
     p style='color: green' = notice
@@ -12,7 +12,7 @@
 
     .d-flex.justify-content-between
       em.me-auto
-        = "by #{@post.creator.username} at "
+        = t('.by_user_at', username: @post.creator.username)
         = render 'shared/timestamps', resource: @post
 
       - if (like = @post.likes.find_by(user: current_user))
@@ -23,19 +23,17 @@
           i.bi.bi-heart
 
       .ms-2
-        - likes = @post.likes.size
-        = "#{likes} #{'person'.pluralize(likes)} liked this"
+        = t('posts.show.people_liked', count: @post.likes.size)
 
     - if current_user == @post.creator
       .d-flex.justify-content-end
-        = link_to 'Edit', edit_post_path(@post), class: 'btn btn-primary me-2'
-        = button_to 'Delete', @post, method: :delete, class: 'btn btn-danger'
+        = link_to t('.edit'), edit_post_path(@post), class: 'btn btn-primary me-2'
+        = button_to t('.delete'), @post, method: :delete, class: 'btn btn-danger'
 
     hr.my-4
 
     h3
-      - comments = @post.comments.size
-      = "#{comments} #{'comment'.pluralize(comments)}"
+      = t('posts.show.comments_count', count: @post.comments.size)
 
     - if current_user
       = render 'comments/form', comment: @post.comments.build

@@ -1,5 +1,5 @@
 .container.mt-5
-  h2.text-center.mb-4 Log in
+  h2.text-center.mb-4 = t('devise.sessions.new.title')
 
   .row.justify-content-center
     .col-md-6.col-lg-6
@@ -11,5 +11,5 @@
           = f.label :password, class: 'form-label'
           = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
         .d-grid.mt-4
-          = f.submit 'Sign in', class: 'btn btn-primary btn-lg'
+          = f.submit t('devise.sessions.new.submit'), class: 'btn btn-primary btn-lg'
       = render 'users/shared/links'

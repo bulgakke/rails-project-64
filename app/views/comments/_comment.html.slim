@@ -16,9 +16,10 @@ div id="#{dom_id comment}"
           data-bs-target="#reply-form-#{comment.id}"
           aria-expanded='false'
           aria-controls="reply-form-#{comment.id}"
-        ] Reply
+        ] = t('.reply')
         - if current_user == comment.user
-            = button_to 'Delete', post_comment_path(@post, comment), method: :delete, class: 'btn btn-danger mt-1 me-1'
+            = button_to t('.delete'), post_comment_path(@post, comment),
+              method: :delete, class: 'btn btn-danger mt-1 me-1'
       .collapse id="reply-form-#{comment.id}"
         = render 'comments/form', comment: comment.children.build(post: comment.post)
 

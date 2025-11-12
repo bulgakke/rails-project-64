@@ -26,7 +26,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
 
     if @post.save
-      redirect_to @post, notice: t('posts.created')
+      redirect_to @post, notice: t('.created', resource: @post.model_name.human)
     else
       render :new, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: t('posts.updated'), status: :see_other
+      redirect_to @post, notice: t('.updated', resource: @post.model_name.human), status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -45,7 +45,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy!
 
-    redirect_to posts_path, notice: t('posts.destroyed'), status: :see_other
+    redirect_to posts_path, notice: t('.destroyed', resource: @post.model_name.human), status: :see_other
   end
 
   private

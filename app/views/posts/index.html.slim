@@ -2,8 +2,8 @@
   p style='color: green' = notice
 
   .d-flex.justify-content-between.align-items-center
-    h2 Posts
-    = link_to 'New post', new_post_path, class: 'btn btn-outline-primary'
+    h2 = t('.title')
+    = link_to t('.new'), new_post_path, class: 'btn btn-outline-primary'
 
   #posts
     - @posts.each do |post|

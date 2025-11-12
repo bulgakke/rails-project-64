@@ -5,10 +5,9 @@
     p = post.body.truncate(200)
 
     em
-      = "by #{post.creator.username} at "
+      = t('posts.show.by_user_at', username: post.creator.username)
       = render 'shared/timestamps', resource: post
 
     br
-    - comments = post.comments.size
-    = "#{comments} #{'comment'.pluralize(comments)} | "
-    = "#{post.likes.size} people liked"
+    = "#{t('posts.show.comments_count', count: post.comments.size)} | "
+    = t('posts.show.people_liked', count: post.likes.size)

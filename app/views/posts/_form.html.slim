@@ -1,7 +1,7 @@
 = form_with(model: post) do |form|
   - if post.errors.any?
     div style='color: red'
-      h2 = "#{pluralize(post.errors.count, 'error')} prohibited this post from being saved:"
+      h2 = t('errors.header', count: post.errors.count, resource: post.model_name.human.downcase)
       ul
         - post.errors.each do |error|
           li = error.full_message

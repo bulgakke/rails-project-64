@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params.merge(post_id: params.expect(:post_id)))
 
     if @comment.save
-      redirect_to @comment.post, notice: t('comments.created')
+      redirect_to @comment.post, notice: t('.created', resource: @comment.model_name.human)
     else
       redirect_to @comment.post, status: :unprocessable_content, alert: t('comments.error')
     end
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   def update
     if @comment.update(comment_params)
-      redirect_to @comment.post, notice: t('comments.updated'), status: :see_other
+      redirect_to @comment.post, notice: t('.updated', resource: @comment.model_name.human), status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy!
 
-    redirect_to @comment.post, notice: t('comments.destroyed'), status: :see_other
+    redirect_to @comment.post, notice: t('.destroyed', resource: @comment.model_name.human), status: :see_other
   end
 
   private
@@ -42,7 +42,6 @@ class CommentsController < ApplicationController
     @comment = PostComment.find(params.expect(:id))
   end
 
-  # Only allow a list of trusted parameters through.
   def comment_params
     params.expect(post_comment: %i[content ancestry])
   end
