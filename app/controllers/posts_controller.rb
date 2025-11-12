@@ -5,12 +5,12 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :allow_only_author, only: %i[edit update destroy]
 
-  # GET /posts or /posts.json
+  # GET /posts
   def index
     @posts = Post.order(created_at: :desc)
   end
 
-  # GET /posts/1 or /posts/1.json
+  # GET /posts/1
   def show; end
 
   # GET /posts/new
@@ -21,42 +21,31 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit; end
 
-  # POST /posts or /posts.json
+  # POST /posts
   def create
     @post = current_user.posts.new(post_params)
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: t('posts.created') }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.save
+      redirect_to @post, notice: t('posts.created')
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /posts/1 or /posts/1.json
+  # PATCH/PUT /posts/1
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: t('posts.updated'), status: :see_other }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.update(post_params)
+      redirect_to @post, notice: t('posts.updated'), status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /posts/1 or /posts/1.json
+  # DELETE /posts/1
   def destroy
     @post.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to posts_path, notice: t('posts.destroyed'), status: :see_other }
-      format.json { head :no_content }
-    end
+    redirect_to posts_path, notice: t('posts.destroyed'), status: :see_other
   end
 
   private

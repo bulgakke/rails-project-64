@@ -5,42 +5,31 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :allow_only_author, only: %i[update destroy]
 
-  # POST /comments or /comments.json
+  # POST /comments
   def create
     @comment = current_user.comments.new(comment_params.merge(post_id: params.expect(:post_id)))
 
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @comment.post, notice: t('comments.created') }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { redirect_to @comment.post, status: :unprocessable_content, alert: t('comments.error') }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    if @comment.save
+      redirect_to @comment.post, notice: t('comments.created')
+    else
+      redirect_to @comment.post, status: :unprocessable_content, alert: t('comments.error')
     end
   end
 
-  # PATCH/PUT /comments/1 or /comments/1.json
+  # PATCH/PUT /comments/1
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to @comment.post, notice: t('comments.updated'), status: :see_other }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    if @comment.update(comment_params)
+      redirect_to @comment.post, notice: t('comments.updated'), status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /comments/1 or /comments/1.json
+  # DELETE /comments/1
   def destroy
     @comment.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to @comment.post, notice: t('comments.destroyed'), status: :see_other }
-      format.json { head :no_content }
-    end
+    redirect_to @comment.post, notice: t('comments.destroyed'), status: :see_other
   end
 
   private
