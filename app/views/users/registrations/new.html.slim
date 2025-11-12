@@ -3,31 +3,17 @@
 
   .row.justify-content-center
     .col-md-6.col-lg-6
-      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-        = render 'devise/shared/error_messages', resource: resource
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        .form-inputs
+          = f.input :username, autofocus: true, autocomplete: 'username'
 
-        .mb-3
-          .d-flex.align-items-center.justify-content-between
-            = f.label :username, class: 'form-label mb-0'
-            small.text-muted 4–20 characters (a-z, 0-9, _)
-          = f.text_field :username, class: 'form-control', autofocus: true, autocomplete: 'username'
+          = f.input :email, autocomplete: 'email'
 
-        .mb-3
-          = f.label :email, class: 'form-label'
-          = f.email_field :email, class: 'form-control', autocomplete: 'email'
+          = f.input :password, autocomplete: 'new-password'
 
-        .mb-3
-          .d-flex.align-items-center.justify-content-between
-            = f.label :password, class: 'form-label'
-            - if @minimum_password_length
-              small.text-muted.d-block.mb-1 = "#{@minimum_password_length} characters minimum"
-          = f.password_field :password, class: 'form-control', autocomplete: 'new-password'
+          = f.input :password_confirmation, autocomplete: 'new-password'
 
-        .mb-3
-          = f.label :password_confirmation, class: 'form-label'
-          = f.password_field :password_confirmation, class: 'form-control', autocomplete: 'new-password'
-
-        .d-grid.mt-4
+        .form-actions.d-grid.mt-4
           = f.submit t('devise.registrations.new.submit'), class: 'btn btn-primary btn-lg'
 
       .text-center.mt-3

@@ -21,9 +21,5 @@ html
     = Sentry.get_trace_propagation_meta.html_safe
     - # rubocop:enable Rails/OutputSafety
   body
-    = render 'layouts/header'
-    p.notice
-      = notice
-    p.alert
-      = alert
+    .pb-4 = render 'layouts/header'
     = yield

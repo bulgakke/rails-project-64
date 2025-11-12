@@ -3,13 +3,16 @@
 
   .row.justify-content-center
     .col-md-6.col-lg-6
-      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        .mb-3
-          = f.label :email, class: 'form-label'
-          = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
-        .mb-3
-          = f.label :password, class: 'form-label'
-          = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
-        .d-grid.mt-4
+      = render 'shared/alerts'
+
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .form-inputs
+          = f.input :email, autofocus: true, autocomplete: 'email', class: 'form-control'
+
+          = f.input :password, autocomplete: 'current-password', class: 'form-control'
+
+        .form-actions.d-grid.mt-4
           = f.submit t('devise.sessions.new.submit'), class: 'btn btn-primary btn-lg'
-      = render 'users/shared/links'
+
+      .text-center.mt-3
+        = render 'users/shared/links'

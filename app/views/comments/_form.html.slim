@@ -1,15 +1,8 @@
-= form_with(model: comment, url: post_comments_path(comment.post_id)) do |form|
-  - if comment.errors.any?
-    div style='color: red'
-      h2 = t('errors.header', count: comment.errors.count, resource: comment.model_name.human.downcase)
-      ul
-        - comment.errors.each do |error|
-          li = error.full_message
+= simple_form_for(comment, url: post_comments_path(comment.post_id)) do |form|
+  .form-inputs
+    = form.hidden_field :ancestry, value: comment.ancestry
 
-  = form.hidden_field :ancestry, value: comment.ancestry
+    = form.input :content, label_html: { style: 'display: none' }
 
-  .mb-3
-    = form.text_area :content, class: 'form-control'
-
-  .mt-2
+  .form-actions
     = form.submit t('.create'), class: 'btn btn-primary'
