@@ -49,8 +49,6 @@ en:
       edit: Edit
       index: All posts
       people_liked: "%{count} people liked this"
-    timestamps:
-      last_updated_at: ", last updated at "
   shared:
     timestamps:
       last_updated_at: ", last updated at "
