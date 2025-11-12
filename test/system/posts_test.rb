@@ -18,6 +18,7 @@ class PostsTest < ApplicationSystemTestCase
     visit posts_url
     click_on 'New post'
 
+    select categories(:one).name, from: 'Category'
     fill_in 'Title', with: 'test'
     fill_in 'Body', with: 'test'
 
